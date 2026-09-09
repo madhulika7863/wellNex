@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WellNex - Personalized Fitness & Mental Wellness</title>
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js for Interactive Progress Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- App Header & Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <div class="brand-logo">
+          <i class="fa-solid fa-heart-pulse"></i>
+        </div>
+        <div>
+          <div class="brand-title">Well<span>Nex</span></div>
+          <div class="brand-subtitle">Personalized Fitness & Mental Wellness System</div>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-btn active" data-tab="dashboard-tab"><i class="fa-solid fa-gauge-high"></i> Dashboard</button>
+        <button class="nav-btn" data-tab="assessment-tab"><i class="fa-solid fa-clipboard-user"></i> Assessment</button>
+        <button class="nav-btn" data-tab="workout-tab"><i class="fa-solid fa-dumbbell"></i> Workout</button>
+        <button class="nav-btn" data-tab="nutrition-tab"><i class="fa-solid fa-utensils"></i> Nutrition</button>
+        <button class="nav-btn" data-tab="wellness-tab"><i class="fa-solid fa-spa"></i> Mental Wellness</button>
+        <button class="nav-btn" data-tab="progress-tab"><i class="fa-solid fa-chart-line"></i> Progress</button>
+        <button class="nav-btn" data-tab="feedback-tab"><i class="fa-solid fa-arrows-spin"></i> Adaptive Loop</button>
+        <button class="nav-btn" data-tab="profile-tab" id="navProfileBtn"><i class="fa-solid fa-circle-user"></i> <span id="headerUserName">Profile</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main class="main-container">
+
+    <!-- ============================================================== -->
+    <!-- TAB 1: ASSESSMENT & DATA COLLECTION WIZARD -->
+    <!-- ============================================================== -->
+    <section id="assessment-tab" class="tab-pane">
+      <div class="section-card assessment-hero">
+        <div class="card-header">
+          <div>
+            <h2><i class="fa-solid fa-clipboard-question"></i> Data Collection & Health Assessment</h2>
+            <p class="text-muted">Enter your physical parameters, lifestyle habits, stress level, and health conditions for the Machine Learning engine to process.</p>
+          </div>
+          <div class="demo-buttons">
+            <button type="button" class="btn btn-sm btn-secondary" id="loadDemoSedentary"><i class="fa-solid fa-user-check"></i> Sample: Sedentary Profile</button>
+            <button type="button" class="btn btn-sm btn-secondary" id="loadDemoAthlete"><i class="fa-solid fa-fire"></i> Sample: Athletic Profile</button>
+          </div>
+        </div>
+
+        <form id="assessmentForm" class="grid-form">
+          <!-- Row 1: Basic Stats -->
+          <div class="form-group">
+            <label><i class="fa-solid fa-user"></i> Full Name</label>
+            <input type="text" id="inputName" class="form-control" placeholder="e.g. Rahul Sharma" required value="Rahul Sharma">
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-calendar"></i> Age (Years)</label>
+            <input type="number" id="inputAge" class="form-control" min="15" max="85" value="26" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-venus-mars"></i> Gender</label>
+            <select id="inputGender" class="form-control">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-ruler-vertical"></i> Height (cm)</label>
+            <input type="number" id="inputHeight" class="form-control" min="120" max="230" value="175" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-weight-scale"></i> Weight (kg)</label>
+            <input type="number" step="0.5" id="inputWeight" class="form-control" min="30" max="200" value="78" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-bullseye"></i> Primary Goal</label>
+            <select id="inputGoal" class="form-control">
+              <option value="Weight Loss">Weight Loss</option>
+              <option value="Muscle Gain">Muscle Gain</option>
+              <option value="Endurance">Endurance & Stamina</option>
+              <option value="Flexibility & Posture">Flexibility & Posture</option>
+              <option value="Stress Relief & General Health">Stress Relief & General Health</option>
+            </select>
+          </div>
+
+          <!-- Row 2: Lifestyle & Mental Wellness -->
+          <div class="form-group">
+            <label><i class="fa-solid fa-person-walking"></i> Activity Level</label>
+            <select id="inputActivity" class="form-control">
+              <option value="Sedentary">Sedentary (Desk job, minimal activity)</option>
+              <option value="Lightly Active" selected>Lightly Active (1-3 light sessions/week)</option>
+              <option value="Moderately Active">Moderately Active (3-5 workouts/week)</option>
+              <option value="Very Active">Very Active (6+ intense workouts/week)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-bed"></i> Average Sleep (Hours/Night)</label>
+            <input type="number" step="0.5" id="inputSleep" class="form-control" min="3" max="12" value="6.5" required>
+          </div>
+
+          <div class="form-group">
+            <label><i class="fa-solid fa-utensils"></i> Dietary Preference</label>
+            <select id="inputDiet" class="form-control">
+              <option value="Vegetarian" selected>Vegetarian</option>
+              <option value="Non-Vegetarian">Non-Vegetarian</option>
+              <option value="Vegan">Vegan (Plant-Based)</option>
+              <option value="Keto">Keto / Low-Carb</option>
+            </select>
+          </div>
+
+          <!-- Row 3: Health Conditions -->
+          <div class="form-group">
+            <label><i class="fa-solid fa-notes-medical"></i> Medical Condition / Pre-existing</label>
+            <select id="inputMedical" class="form-control highlight-select">
+              <option value="None" selected>None (Healthy)</option>
+              <option value="Hypertension">Hypertension (High Blood Pressure)</option>
+              <option value="Diabetes">Diabetes (Type 1 / Type 2)</option>
+              <option value="Asthma">Asthma / Respiratory Sensitivity</option>
+              <option value="Knee/Joint Pain">Knee / Joint Pain (Requires Low-Impact)</option>
+              <option value="Back Pain">Lower Back Pain / Spinal Care</option>
+            </select>
+          </div>
+
+          <!-- Stress Level Interactive Slider -->
+          <div class="form-group full-width stress-slider-container">
+            <div class="stress-label-bar">
+              <label><i class="fa-solid fa-heart-pulse"></i> Perceived Daily Stress Level: <span id="stressValueBadge" class="badge badge-warning">6 / 10 (Moderate)</span></label>
+              <div class="d-flex align-items-center gap-2">
+                <button type="button" class="btn btn-xs btn-outline" id="jumpToPsyAssessmentBtn" title="Take clinical PSS-4/GAD-7 questionnaire">
+                  <i class="fa-solid fa-clipboard-check text-teal"></i> Clinical Quiz (PSS/GAD-7)
+                </button>
+                <span id="stressReactionIcon" class="stress-emoji">😐</span>
+              </div>
+            </div>
+            <input type="range" id="inputStress" class="range-slider" min="1" max="10" value="6">
+            <div class="slider-scale">
+              <span>1 (Deep Zen)</span>
+              <span>5 (Manageable)</span>
+              <span>10 (Severe Burnout)</span>
+            </div>
+          </div>
+
+          <div class="form-actions full-width">
+            <button type="submit" class="btn btn-primary btn-lg" id="submitAssessmentBtn">
+              <i class="fa-solid fa-circle-check"></i> Generate My Personalized Plan
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 2: OVERVIEW / DASHBOARD -->
+    <!-- ============================================================== -->
+    <section id="dashboard-tab" class="tab-pane active">
+      <!-- Welcome Archetype Banner -->
+      <div class="archetype-banner" id="archetypeBanner">
+        <div class="banner-content">
+          <div class="archetype-tag"><i class="fa-solid fa-users"></i> Wellness Cohort <span id="clusterNumber">#1</span></div>
+          <h1 id="archetypeName">Cardio & Weight Management Achiever</h1>
+          <p id="archetypeDesc">Optimizing fat oxidation, moderate cardiovascular stamina, and proactive cortisol management.</p>
+          <div class="medical-alert-box" id="healthAlertBox" style="display: none;">
+            <i class="fa-solid fa-shield-halved"></i> <span id="healthAlertText">Special medical adaptation applied.</span>
+          </div>
+        </div>
+        <div class="banner-actions">
+          <button class="btn btn-secondary" onclick="switchTab('workout-tab')"><i class="fa-solid fa-dumbbell"></i> View Today's Workout</button>
+          <button class="btn btn-outline" onclick="switchTab('wellness-tab')"><i class="fa-solid fa-spa"></i> Breathwork</button>
+        </div>
+      </div>
+
+      <!-- Quick Biometric Stat Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon icon-blue"><i class="fa-solid fa-weight-scale"></i></div>
+          <div class="stat-details">
+            <div class="stat-label">Body Mass Index (BMI)</div>
+            <div class="stat-val" id="bmiValue">25.5</div>
+            <span class="badge badge-warning" id="bmiCategoryBadge">Overweight</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-emerald"><i class="fa-solid fa-fire-flame-curved"></i></div>
+          <div class="stat-details">
+            <div class="stat-label">Daily Target Calories</div>
+            <div class="stat-val" id="targetCalValue">1,940 <small>kcal</small></div>
+            <span class="text-muted" id="tdeeDesc">TDEE: 2,390 kcal (-450 deficit)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-purple"><i class="fa-solid fa-heart-pulse"></i></div>
+          <div class="stat-details">
+            <div class="stat-label">Stress & Nervous State</div>
+            <div class="stat-val" id="stressStateVal">Moderate (6/10)</div>
+            <span class="text-muted" id="stressActionText">2 Breathwork sessions daily</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-cyan"><i class="fa-solid fa-glass-water"></i></div>
+          <div class="stat-details">
+            <div class="stat-label">Hydration Tracker</div>
+            <div class="stat-val" id="waterIntakeVal">1.5 / 3.0 <small>Liters</small></div>
+            <div class="water-actions">
+              <button class="btn btn-xs btn-outline" id="addWaterBtn"><i class="fa-solid fa-plus"></i> 250 ml</button>
+              <button class="btn btn-xs btn-outline" id="resetWaterBtn">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Panels: Today's Routine & Coach Snapshot -->
+      <div class="two-col-layout">
+        <!-- Quick Workout Summary -->
+        <div class="section-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-calendar-check"></i> Today's Scheduled Focus</h3>
+            <span class="badge badge-primary" id="todayIntensityBadge">Moderate Intensity</span>
+          </div>
+          <div id="todayWorkoutSnippet">
+            <h4 id="todayFocusTitle">Cardio Fat Burn & Core Conditioning</h4>
+            <p class="text-muted" id="todayWarmupSnippet">Warm-up: 5-min dynamic arm & leg mobility.</p>
+            <div class="quick-exercises-list" id="todayExercisesSnippet">
+              <!-- Rendered via JS -->
+            </div>
+            <button class="btn btn-primary btn-block mt-3" onclick="switchTab('workout-tab')">
+              <i class="fa-solid fa-arrow-right"></i> Open Full 7-Day Workout Routine
+            </button>
+          </div>
+        </div>
+
+        <!-- Today's Nutrition & Mental Wellness Snapshot -->
+        <div class="section-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-bowl-food"></i> Nutrition & Mind Snapshot</h3>
+            <span class="badge badge-success" id="dietStrategyBadge">High Protein Calorie Deficit</span>
+          </div>
+          <div class="macro-bars-preview">
+            <div class="macro-bar-item">
+              <div class="macro-label"><span>Protein</span> <strong id="previewProtein">120g</strong></div>
+              <div class="progress-track"><div class="progress-fill fill-emerald" id="barProtein" style="width: 35%;"></div></div>
+            </div>
+            <div class="macro-bar-item">
+              <div class="macro-label"><span>Carbohydrates</span> <strong id="previewCarbs">190g</strong></div>
+              <div class="progress-track"><div class="progress-fill fill-blue" id="barCarbs" style="width: 45%;"></div></div>
+            </div>
+            <div class="macro-bar-item">
+              <div class="macro-label"><span>Healthy Fats</span> <strong id="previewFats">54g</strong></div>
+              <div class="progress-track"><div class="progress-fill fill-amber" id="barFats" style="width: 25%;"></div></div>
+            </div>
+          </div>
+
+          <div class="mind-tip-box mt-3">
+            <div class="tip-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <div>
+              <strong>Daily Mental Reset Prompt:</strong>
+              <p class="text-muted" id="dailyMindTipText">Practice the 4-7-8 breathing drill whenever afternoon fatigue peaks.</p>
+            </div>
+          </div>
+
+          <button class="btn btn-outline btn-block mt-3" onclick="switchTab('nutrition-tab')">
+            <i class="fa-solid fa-utensils"></i> View Full Daily Meal Plan
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 3: WORKOUT PLANNER -->
+    <!-- ============================================================== -->
+    <section id="workout-tab" class="tab-pane">
+      <div class="section-card">
+        <div class="card-header">
+          <div>
+            <h2><i class="fa-solid fa-dumbbell"></i> Personalized 7-Day Workout Schedule</h2>
+            <p class="text-muted" id="workoutSplitHeader">Split: Cardio Fat Burn & Light Strength • Intensity: Moderate</p>
+          </div>
+          <div class="workout-progress-chip">
+            <i class="fa-solid fa-circle-check"></i> <span id="completedWorkoutsCount">0</span> of <span id="totalWorkoutsCount">7</span> Sessions Done
+          </div>
+        </div>
+
+        <!-- Day Selector Tabs -->
+        <div class="day-tabs-nav" id="dayTabsNav">
+          <!-- Injected via JS -->
+        </div>
+
+        <!-- Active Day Workout Details -->
+        <div class="day-workout-view mt-3" id="activeDayContent">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 4: NUTRITION & DIET PLAN -->
+    <!-- ============================================================== -->
+    <section id="nutrition-tab" class="tab-pane">
+      <div class="section-card">
+        <div class="card-header">
+          <div>
+            <h2><i class="fa-solid fa-utensils"></i> Personalized Nutrition & Meal Plan</h2>
+            <p class="text-muted" id="dietStrategySubtitle">Balanced macronutrients engineered for your metabolic rate and goals.</p>
+          </div>
+          <div class="cal-badge-pill">
+            <i class="fa-solid fa-fire"></i> <span id="dietTotalCalories">1,940</span> Calories Target
+          </div>
+        </div>
+
+        <!-- Macro Breakdown Visual Cards -->
+        <div class="macro-cards-grid">
+          <div class="macro-card">
+            <div class="macro-card-title">Protein</div>
+            <div class="macro-card-amount" id="macroProteinVal">120 g</div>
+            <div class="text-muted">Preserves lean mass & boosts satiety</div>
+          </div>
+          <div class="macro-card">
+            <div class="macro-card-title">Carbohydrates</div>
+            <div class="macro-card-amount" id="macroCarbsVal">190 g</div>
+            <div class="text-muted">Complex sources for sustained energy</div>
+          </div>
+          <div class="macro-card">
+            <div class="macro-card-title">Healthy Fats</div>
+            <div class="macro-card-amount" id="macroFatsVal">54 g</div>
+            <div class="text-muted">Hormone balance & cellular health</div>
+          </div>
+          <div class="macro-card">
+            <div class="macro-card-title">Water Target</div>
+            <div class="macro-card-amount" id="macroWaterVal">3.0 Liters</div>
+            <div class="text-muted">Cellular hydration & toxin flushing</div>
+          </div>
+        </div>
+
+        <!-- Medical Dietary Notes -->
+        <div class="medical-alert-box mt-3" id="dietConditionNotes" style="display:none;">
+          <i class="fa-solid fa-circle-info"></i>
+          <span id="dietConditionText"></span>
+        </div>
+
+        <!-- Meal Cards Grid -->
+        <h3 class="mt-4 mb-3"><i class="fa-solid fa-clock"></i> Daily Meal Schedule</h3>
+        <div class="meals-grid" id="mealsContainer">
+          <!-- Injected dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 5: MENTAL WELLNESS HUB -->
+    <!-- ============================================================== -->
+    <section id="wellness-tab" class="tab-pane">
+      <div class="two-col-layout">
+        <!-- Interactive 4-7-8 Breathing Circle -->
+        <div class="section-card text-center">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-lungs"></i> 4-7-8 Breathing Pacer</h3>
+            <span class="badge badge-cyan">Vagus Nerve Calming</span>
+          </div>
+          <p class="text-muted">Follow the expanding and contracting rhythm. Inhale (4s) - Hold (7s) - Exhale (8s).</p>
+
+          <div class="breathing-circle-wrapper">
+            <div class="breathing-circle" id="breathingCircle">
+              <div class="breath-action-text" id="breathActionText">Ready</div>
+              <div class="breath-timer-number" id="breathTimerNum">--</div>
+            </div>
+          </div>
+
+          <div class="breath-controls mt-3">
+            <button class="btn btn-primary" id="startBreathBtn"><i class="fa-solid fa-play"></i> Start Session</button>
+            <button class="btn btn-outline" id="stopBreathBtn" disabled><i class="fa-solid fa-pause"></i> Pause</button>
+            <div class="cycles-counter mt-2 text-muted">Completed Cycles: <strong id="breathCyclesDone">0</strong></div>
+          </div>
+        </div>
+
+        <!-- Guided Meditation Timer & Stress Management -->
+        <div class="section-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-om"></i> Meditation & Ambient Focus</h3>
+            <span class="badge badge-purple" id="meditationPresetBadge">10 Mins Recommended</span>
+          </div>
+
+          <div class="meditation-timer-box">
+            <div class="meditation-time-display" id="meditationTimeDisplay">10:00</div>
+            <div class="timer-preset-btns">
+              <button class="btn btn-xs btn-outline preset-time-btn" data-time="300">5 Mins</button>
+              <button class="btn btn-xs btn-outline preset-time-btn active" data-time="600">10 Mins</button>
+              <button class="btn btn-xs btn-outline preset-time-btn" data-time="900">15 Mins</button>
+            </div>
+            <div class="meditation-actions mt-3">
+              <button class="btn btn-success" id="startMeditationBtn"><i class="fa-solid fa-play"></i> Begin Meditation</button>
+              <button class="btn btn-outline" id="resetMeditationBtn"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+            </div>
+          </div>
+
+          <h4 class="mt-4 mb-2"><i class="fa-solid fa-feather"></i> Recommended Mental Wellness Rituals</h4>
+          <div class="wellness-tips-list" id="wellnessTipsContainer">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Standardized Psychological Assessment (PSS-4 & GAD-7) -->
+      <div class="section-card mt-4" id="psyAssessmentSection">
+        <div class="card-header">
+          <div>
+            <h3><i class="fa-solid fa-square-poll-vertical text-teal"></i> Standardized Psychological Self-Assessment</h3>
+            <p class="text-muted">Clinically validated screening instruments to quantify perceived stress and general anxiety.</p>
+          </div>
+          <!-- Scale Switcher Tabs -->
+          <div class="psy-scale-switch">
+            <button type="button" class="btn btn-sm btn-scale active" id="btnScalePSS" data-scale="PSS-4">
+              <i class="fa-solid fa-brain"></i> PSS-4 Stress Scale (4 Qs)
+            </button>
+            <button type="button" class="btn btn-sm btn-scale" id="btnScaleGAD" data-scale="GAD-7">
+              <i class="fa-solid fa-heart-pulse"></i> GAD-7 Anxiety Screener (7 Qs)
+            </button>
+          </div>
+        </div>
+
+        <!-- Scale Info Banner -->
+        <div class="psy-scale-info mb-4" id="psyScaleInfo">
+          <div class="info-tag">
+            <i class="fa-solid fa-circle-info text-teal"></i> 
+            <span id="psyScaleDescription">Cohen's Perceived Stress Scale (PSS-4) measures the degree to which situations in your life are appraised as unpredictable, uncontrollable, and overloading over the last month.</span>
+          </div>
+          <div class="info-badge-group">
+            <span class="badge badge-subtle" id="psyQuestionCountBadge"><i class="fa-solid fa-list-check"></i> 4 Questions</span>
+            <span class="badge badge-subtle"><i class="fa-solid fa-stopwatch"></i> ~1-2 Minutes</span>
+          </div>
+        </div>
+
+        <!-- Active Questionnaire Form -->
+        <form id="psyScreeningForm">
+          <div class="psy-questions-list" id="psyQuestionsContainer">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+          <div class="psy-submit-row mt-4">
+            <button type="submit" class="btn btn-primary" id="btnSubmitScreening">
+              <i class="fa-solid fa-calculator"></i> Calculate Clinical Score
+            </button>
+            <button type="button" class="btn btn-outline" id="btnResetScreening">
+              <i class="fa-solid fa-rotate-left"></i> Reset
+            </button>
+            <span class="text-muted text-sm ml-auto" id="psyAnsweredProgress">Answered: 0 / 4</span>
+          </div>
+        </form>
+
+        <!-- Result Box (Hidden until calculated) -->
+        <div class="psy-result-card mt-4" id="psyResultCard" style="display:none;">
+          <div class="psy-result-grid">
+            <!-- Left: Score Gauge -->
+            <div class="psy-score-box">
+              <div class="psy-gauge-circle" id="psyGaugeCircle">
+                <div class="psy-score-num" id="psyScoreNum">0</div>
+                <div class="psy-score-max" id="psyScoreMax">/ 16</div>
+              </div>
+              <div class="psy-severity-badge mt-3" id="psySeverityBadge">Moderate Stress</div>
+              <div class="text-muted text-xs mt-1" id="psyScaleNameLabel">PSS-4 Clinical Index</div>
+            </div>
+
+            <!-- Right: Clinical Interpretation & Actions -->
+            <div class="psy-insight-box">
+              <div class="psy-insight-title">
+                <i class="fa-solid fa-stethoscope text-teal"></i> Clinical Summary & Interpretation
+              </div>
+              <p class="psy-feedback-text" id="psyFeedbackText">
+                Your responses indicate mild situational worry with robust psychological adaptability.
+              </p>
+
+              <h4 class="mt-3 mb-2"><i class="fa-solid fa-wand-magic-sparkles text-purple"></i> Targeted Wellness Interventions</h4>
+              <ul class="psy-tips-list" id="psyTipsList">
+                <!-- Injected via JS -->
+              </ul>
+
+              <!-- Profile Sync Button -->
+              <div class="psy-sync-action-box mt-3">
+                <div class="psy-sync-info">
+                  <div class="fw-bold text-sm text-main"><i class="fa-solid fa-arrows-rotate text-teal"></i> Synchronize with Health Profile</div>
+                  <div class="text-xs text-muted">Directly maps this clinical assessment into your profile stress index to adapt workout volume and recovery.</div>
+                </div>
+                <button type="button" class="btn btn-sm btn-primary" id="btnSyncStressProfile">
+                  <i class="fa-solid fa-bolt"></i> Sync with your profile
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Past Screenings Mini-History -->
+        <div class="psy-history-section mt-4" id="psyHistorySection" style="display:none;">
+          <h4 class="text-muted text-sm mb-2"><i class="fa-solid fa-clock-rotate-left"></i> Recent Screening History</h4>
+          <div class="psy-history-tags" id="psyHistoryList">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 6: PROGRESS TRACKING & ANALYTICS -->
+    <!-- ============================================================== -->
+    <section id="progress-tab" class="tab-pane">
+      <div class="two-col-layout">
+        <!-- Daily Log Form -->
+        <div class="section-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-pen-to-square"></i> Log Today's Progress</h3>
+            <span class="badge badge-primary">Daily Check-in</span>
+          </div>
+          <form id="progressForm">
+            <div class="form-group">
+              <label>Current Weight (kg)</label>
+              <input type="number" step="0.2" id="logWeight" class="form-control" placeholder="e.g. 77.5" required>
+            </div>
+            <div class="form-group">
+              <label>Workouts Completed Today</label>
+              <select id="logWorkouts" class="form-control">
+                <option value="1">1 Session Completed</option>
+                <option value="2">2 Sessions Completed</option>
+                <option value="0">Rest Day (0 Sessions)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Today's Mood (1 to 10)</label>
+              <input type="range" id="logMood" class="range-slider" min="1" max="10" value="8">
+              <div class="slider-scale"><span>1 (Low)</span><span>5 (Average)</span><span>10 (Ecstatic)</span></div>
+            </div>
+            <div class="form-group">
+              <label>Today's Stress (1 to 10)</label>
+              <input type="range" id="logStress" class="range-slider" min="1" max="10" value="4">
+              <div class="slider-scale"><span>1 (Calm)</span><span>5 (Moderate)</span><span>10 (Severe)</span></div>
+            </div>
+            <div class="form-group">
+              <label>Personal Reflection / Notes</label>
+              <textarea id="logNotes" class="form-control" rows="2" placeholder="Felt energized during pushups, slept 7.5 hours."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-cloud-arrow-up"></i> Save Daily Entry</button>
+          </form>
+        </div>
+
+        <!-- Progress Charts -->
+        <div class="section-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-chart-line"></i> Performance Trajectory</h3>
+            <span class="badge badge-success">Live Analytics</span>
+          </div>
+          <div class="chart-container" style="height: 250px;">
+            <canvas id="weightHistoryChart"></canvas>
+          </div>
+          <div class="chart-container mt-4" style="height: 200px;">
+            <canvas id="moodStressChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 7: ADAPTIVE FEEDBACK MODULE -->
+    <!-- ============================================================== -->
+    <section id="feedback-tab" class="tab-pane">
+      <div class="section-card max-w-700">
+        <div class="card-header">
+          <div>
+            <h2><i class="fa-solid fa-sliders"></i> Routine Fine-Tuning & Feedback</h2>
+            <p class="text-muted">Adjust workout difficulty and personal preferences to keep your plan comfortably aligned.</p>
+          </div>
+          <span class="badge badge-cyan">Adaptive Plan</span>
+        </div>
+
+        <form id="feedbackForm" class="mt-3">
+          <div class="form-group">
+            <label>Overall Plan Satisfaction</label>
+            <div class="star-rating" id="starRating">
+              <i class="fa-solid fa-star active" data-rating="1"></i>
+              <i class="fa-solid fa-star active" data-rating="2"></i>
+              <i class="fa-solid fa-star active" data-rating="3"></i>
+              <i class="fa-solid fa-star active" data-rating="4"></i>
+              <i class="fa-solid fa-star active" data-rating="5"></i>
+            </div>
+            <input type="hidden" id="feedbackRating" value="5">
+          </div>
+
+          <div class="form-group">
+            <label>How did the workout intensity feel?</label>
+            <div class="difficulty-options">
+              <label class="diff-btn">
+                <input type="radio" name="difficulty" value="Too Easy">
+                <span><i class="fa-solid fa-feather"></i> Too Easy (Increase Intensity)</span>
+              </label>
+              <label class="diff-btn active">
+                <input type="radio" name="difficulty" value="Just Right" checked>
+                <span><i class="fa-solid fa-thumbs-up"></i> Just Right (Optimal)</span>
+              </label>
+              <label class="diff-btn">
+                <input type="radio" name="difficulty" value="Too Hard">
+                <span><i class="fa-solid fa-triangle-exclamation"></i> Too Hard (Lower Intensity)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Energy Level Post-Workout</label>
+            <select id="feedbackEnergy" class="form-control">
+              <option value="High" selected>High & Refreshed</option>
+              <option value="Moderate">Moderate</option>
+              <option value="Drained">Drained / Exhausted</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Detailed Comments / Adjustments Requested</label>
+            <textarea id="feedbackComments" class="form-control" rows="3" placeholder="Share how your workouts felt, any muscle soreness, or adjustments needed..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitFeedbackBtn">
+            <i class="fa-solid fa-arrows-rotate"></i> Submit Feedback & Recalibrate System
+          </button>
+        </form>
+
+        <div id="feedbackResultAlert" class="mt-3" style="display:none;"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- TAB 8: USER PROFILE & COMPLETE HEALTH DATA -->
+    <!-- ============================================================== -->
+    <section id="profile-tab" class="tab-pane">
+      <!-- Profile Hero Banner Card -->
+      <div class="profile-hero-card section-card">
+        <div class="profile-hero-main">
+          <div class="profile-avatar" id="profileAvatarIcon">
+            <span id="profileInitials">RS</span>
+          </div>
+          <div class="profile-hero-info">
+            <div class="profile-title-row">
+              <h2 id="profileFullName">Rahul Sharma</h2>
+              <span class="badge badge-primary" id="profileCohortBadge"><i class="fa-solid fa-id-badge"></i> Cohort #1</span>
+              <span class="badge badge-success"><i class="fa-solid fa-circle-check"></i> Plan Active</span>
+            </div>
+            <p class="text-muted" id="profileHeroSubtitle">Personalized Health & Wellness Plan • Active Member</p>
+            <div class="profile-quick-stats">
+              <div class="quick-pill"><i class="fa-solid fa-bullseye text-primary"></i> Goal: <strong id="profileGoalText">Weight Loss</strong></div>
+              <div class="quick-pill"><i class="fa-solid fa-heart-pulse text-cyan"></i> Stress Level: <strong id="profileStressText">6 / 10</strong></div>
+              <div class="quick-pill"><i class="fa-solid fa-bed text-purple"></i> Sleep: <strong id="profileSleepText">6.5 hrs</strong></div>
+              <div class="quick-pill"><i class="fa-solid fa-notes-medical text-danger"></i> Medical: <strong id="profileMedicalText">None</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-hero-actions">
+          <button class="btn btn-primary" onclick="switchTab('assessment-tab')">
+            <i class="fa-solid fa-pen-to-square"></i> Retake / Edit Assessment
+          </button>
+          <button class="btn btn-secondary" onclick="switchTab('dashboard-tab')">
+            <i class="fa-solid fa-gauge-high"></i> Back to Dashboard
+          </button>
+        </div>
+      </div>
+
+      <!-- 3-Column Detailed Data Grid -->
+      <div class="profile-sections-grid">
+        <!-- 1. Physical Biometrics -->
+        <div class="section-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-ruler-combined"></i> Physical Biometrics</h3>
+            <span class="badge badge-cyan">Body Stats</span>
+          </div>
+          <div class="profile-data-list">
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-cake-candles"></i> Age</span>
+              <span class="data-val" id="profAgeVal">26 Years</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-venus-mars"></i> Gender</span>
+              <span class="data-val" id="profGenderVal">Male</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-ruler-vertical"></i> Height</span>
+              <span class="data-val" id="profHeightVal">175 cm (5 ft 9 in)</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-weight-scale"></i> Current Weight</span>
+              <span class="data-val" id="profWeightVal">78.0 kg</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-chart-simple"></i> Body Mass Index (BMI)</span>
+              <div class="data-val-group">
+                <span class="data-val" id="profBmiVal">25.47</span>
+                <span class="badge badge-warning" id="profBmiBadge">Overweight</span>
+              </div>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-bolt"></i> Basal Metabolic Rate (BMR)</span>
+              <span class="data-val" id="profBmrVal">1,720 kcal/day</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-fire"></i> Estimated TDEE</span>
+              <span class="data-val" id="profTdeeVal">2,365 kcal/day</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Lifestyle & Health Status -->
+        <div class="section-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-heart-pulse"></i> Lifestyle & Wellness</h3>
+            <span class="badge badge-primary">Lifestyle</span>
+          </div>
+          <div class="profile-data-list">
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-bullseye"></i> Primary Goal</span>
+              <span class="data-val" id="profGoalDetailVal">Weight Loss</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-person-walking"></i> Activity Level</span>
+              <span class="data-val" id="profActivityVal">Lightly Active</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-bed"></i> Daily Sleep</span>
+              <span class="data-val" id="profSleepVal">6.5 hours/night</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-utensils"></i> Dietary Preference</span>
+              <span class="data-val" id="profDietVal">Vegetarian</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-brain"></i> Perceived Daily Stress</span>
+              <div class="data-val-group">
+                <span class="data-val" id="profStressNum">6 / 10</span>
+                <span class="badge badge-warning" id="profStressBadge">Moderate</span>
+              </div>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-shield-halved"></i> Medical Condition</span>
+              <span class="data-val" id="profMedicalVal">None (Healthy)</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-users-viewfinder"></i> User Cohort</span>
+              <span class="data-val" id="profArchetypeName">Cardio & Weight Management Achiever</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Active Prescription Targets -->
+        <div class="section-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-clipboard-check"></i> Prescribed Regimen</h3>
+            <span class="badge badge-success">Active Targets</span>
+          </div>
+          <div class="profile-data-list">
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-fire-burner"></i> Daily Target Calories</span>
+              <span class="data-val text-primary" id="profCalTarget">1,940 kcal</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-dna"></i> Daily Protein Goal</span>
+              <span class="data-val" id="profProteinTarget">120 g</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-wheat-awn"></i> Carbohydrates</span>
+              <span class="data-val" id="profCarbsTarget">190 g</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-droplet"></i> Healthy Fats</span>
+              <span class="data-val" id="profFatsTarget">54 g</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-glass-water"></i> Hydration Target</span>
+              <span class="data-val" id="profWaterTarget">3.0 Liters</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-dumbbell"></i> Workout Routine</span>
+              <span class="data-val" id="profSplitTarget">Cardio Fat Burn & Core</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label"><i class="fa-solid fa-lungs"></i> Daily Breathwork</span>
+              <span class="data-val" id="profBreathTarget">2 Sessions (4-7-8 Drill)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- FLOATING WELLNESS ASSISTANT CHAT WIDGET -->
+  <!-- ============================================================== -->
+  <div class="chat-fab-button" id="chatToggleBtn" title="Chat with Wellness Coach">
+    <i class="fa-solid fa-comment-dots"></i>
+    <span class="chat-badge-pulse"></span>
+  </div>
+
+  <div class="chat-drawer" id="chatDrawer">
+    <div class="chat-header">
+      <div class="chat-title-group">
+        <div class="chat-avatar"><i class="fa-solid fa-heart-pulse"></i></div>
+        <div>
+          <div class="chat-name">WellNex Guide</div>
+          <div class="chat-status"><span class="status-dot"></span> Online & Ready to Help</div>
+        </div>
+      </div>
+      <button class="chat-close-btn" id="chatCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Quick Prompt Chips -->
+    <div class="chat-chips-bar">
+      <button class="chip-btn" data-query="Quick 2-min stress relief tips">🧘 Stress Relief</button>
+      <button class="chip-btn" data-query="Can I do squats with knee pain?">🦵 Knee Safety</button>
+      <button class="chip-btn" data-query="Healthy high-protein snacks">🥗 Snack Ideas</button>
+      <button class="chip-btn" data-query="How do I overcome muscle soreness?">💪 Muscle Soreness</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-bubble bot-bubble">
+        <p>👋 Hello! I am your <strong>WellNex Guide</strong>. How can I help you today with your workouts, nutrition, or mindfulness routine?</p>
+      </div>
+    </div>
+
+    <form class="chat-input-bar" id="chatForm">
+      <input type="text" id="chatInput" placeholder="Ask a question about workouts, meals, or wellness..." autocomplete="off">
+      <button type="submit" id="chatSendBtn" aria-label="Send message"><i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- App Client Scripts -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

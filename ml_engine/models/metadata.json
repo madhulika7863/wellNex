@@ -1,0 +1,110 @@
+{
+  "cluster_features": [
+    "age",
+    "bmi",
+    "stress_level",
+    "sleep_hours",
+    "activity_num",
+    "goal_num"
+  ],
+  "dt_features": [
+    "age",
+    "gender_num",
+    "bmi",
+    "goal_num",
+    "activity_num",
+    "stress_level",
+    "sleep_hours",
+    "medical_num"
+  ],
+  "cluster_profiles": {
+    "0": {
+      "name": "High-Stress & Sedentary Rebooter",
+      "avg_age": 62.4,
+      "avg_bmi": 33.0,
+      "avg_stress": 2.8,
+      "avg_sleep": 7.4,
+      "top_goal": "Weight Loss",
+      "top_activity": "Sedentary",
+      "count": 78280,
+      "summary": "Cohort with mean BMI 33.0 and stress level 2.8/10."
+    },
+    "1": {
+      "name": "Cardio & Weight Management Achiever",
+      "avg_age": 65.2,
+      "avg_bmi": 24.8,
+      "avg_stress": 2.7,
+      "avg_sleep": 7.5,
+      "top_goal": "Flexibility & Posture",
+      "top_activity": "Moderately Active",
+      "count": 87947,
+      "summary": "Cohort with mean BMI 24.8 and stress level 2.7/10."
+    },
+    "2": {
+      "name": "Peak Strength & Athletic Builder",
+      "avg_age": 54.7,
+      "avg_bmi": 29.6,
+      "avg_stress": 8.1,
+      "avg_sleep": 5.9,
+      "top_goal": "Stress Relief & General Health",
+      "top_activity": "Sedentary",
+      "count": 19954,
+      "summary": "Cohort with mean BMI 29.6 and stress level 8.1/10."
+    },
+    "3": {
+      "name": "Therapeutic & Mindful Wellness Seeker",
+      "avg_age": 41.3,
+      "avg_bmi": 26.8,
+      "avg_stress": 2.8,
+      "avg_sleep": 7.5,
+      "top_goal": "Weight Loss",
+      "top_activity": "Moderately Active",
+      "count": 67499,
+      "summary": "Cohort with mean BMI 26.8 and stress level 2.8/10."
+    }
+  },
+  "metrics": {
+    "kmeans_inertia": 798626.01,
+    "intensity_accuracy": 99.39,
+    "split_accuracy": 99.15,
+    "diet_accuracy": 100.0
+  },
+  "intensity_feature_importances": {
+    "age": 0.434,
+    "gender_num": 0.0,
+    "bmi": 0.168,
+    "goal_num": 0.0,
+    "activity_num": 0.101,
+    "stress_level": 0.02,
+    "sleep_hours": 0.0,
+    "medical_num": 0.276
+  },
+  "maps": {
+    "activity": {
+      "Sedentary": 0,
+      "Lightly Active": 1,
+      "Moderately Active": 2,
+      "Very Active": 3
+    },
+    "goal": {
+      "Weight Loss": 0,
+      "Muscle Gain": 1,
+      "Endurance": 2,
+      "Flexibility & Posture": 3,
+      "Stress Relief & General Health": 4
+    },
+    "medical": {
+      "None": 0,
+      "Hypertension": 1,
+      "Diabetes": 2,
+      "Asthma": 3,
+      "Knee/Joint Pain": 4,
+      "Back Pain": 5
+    },
+    "gender": {
+      "Male": 0,
+      "Female": 1,
+      "Other": 2
+    }
+  }
+}
