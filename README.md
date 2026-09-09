@@ -1,9 +1,4 @@
 # WellNex - Personalized Fitness & Mental Wellness Coach
-
-> **Academic Project Submission**  
-> **Institution**: Madan Mohan Malaviya University of Technology (MMMUT), Gorakhpur  
-> **Domain**: Machine Learning & Health Informatics  
-
 ---
 
 ## 📌 Project Overview
@@ -144,28 +139,6 @@ The machine learning models are trained on the **CDC Behavioral Risk Factor Surv
 
 ---
 
-## 🎓 Viva & Presentation Demonstration Guide
 
-When presenting this project:
-1. **Assessment Demo**:
-   - Click **"Demo: High Stress & Joint Pain"** on the Assessment tab. Notice how the medical condition `Knee/Joint Pain` and stress `8/10` are populated.
-   - Click **"Run AI Processing"**.
-   - Show how the AI automatically:
-     - Sets intensity to **Low**.
-     - Generates low-impact swimming and upper body exercises (omitting heavy squats).
-     - Recommends an anti-inflammatory cortisol-balancing meal plan.
-2. **Mental Wellness Showcase**:
-   - Navigate to the **Mental Wellness** tab.
-   - Click **"Start Session"** on the **4-7-8 Breathing Pacer**. Notice the smooth circle expansion on Inhale (4s), steady hold (7s), slow contraction on Exhale (8s), and calming synthesizer audio chimes.
-3. **Adaptive Feedback Loop**:
-   - Go to the **Adaptive Loop** tab.
-   - Select **"Too Hard"** and click submit.
-   - Highlight the alert showing how the closed-loop AI automatically decreases workout intensity to protect the user from injury.
-4. **ML Showcase Tab**:
-   - Open the **ML Showcase** tab to show the evaluators the Decision Tree accuracy metrics and the 4 K-Means user cohorts.
-5. **AI Chatbot**:
-   - Click the floating chatbot button on the bottom right and ask: *"Can I do squats with knee pain?"* or *"How to relieve stress quickly?"* to demonstrate real-time context awareness.
-
----
 
 © Madan Mohan Malaviya University of Technology (MMMUT), Gorakhpur.
