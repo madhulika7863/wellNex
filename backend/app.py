@@ -5,6 +5,13 @@ Project Architecture: Madan Mohan Malaviya University of Technology (MMMUT), Gor
 """
 
 import os
+import sys
+
+# Ensure repository root is on sys.path
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 import json
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from backend.database import (
@@ -17,8 +24,8 @@ from ml_engine.recommender import Recommender
 from backend.chatbot import FitnessWellnessChatbot
 
 # Configure paths
-TEMPLATE_DIR = os.path.abspath("templates")
-STATIC_DIR = os.path.abspath("static")
+TEMPLATE_DIR = os.path.join(PROJECT_ROOT, "templates")
+STATIC_DIR = os.path.join(PROJECT_ROOT, "static")
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.config["TEMPLATES_AUTO_RELOAD"] = True

@@ -9,7 +9,7 @@ import json
 import joblib
 import numpy as np
 
-MODELS_DIR = "ml_engine/models"
+MODELS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
 
 class Recommender:
     def __init__(self):

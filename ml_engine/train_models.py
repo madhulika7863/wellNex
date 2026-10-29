@@ -5,6 +5,13 @@ Train Machine Learning Models for Personalized Fitness & Mental Wellness Coach
 """
 
 import os
+import sys
+
+# Ensure repository root is on sys.path
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 import json
 import joblib
 import numpy as np
@@ -16,8 +23,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 from ml_engine.dataset_generator import generate_dataset
 
-MODELS_DIR = "ml_engine/models"
-DATA_PATH = "data/fitness_wellness_data.csv"
+MODELS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
+DATA_PATH = os.path.join(PROJECT_ROOT, "data", "fitness_wellness_data.csv")
 
 # Encoding maps
 ACTIVITY_MAP = {"Sedentary": 0, "Lightly Active": 1, "Moderately Active": 2, "Very Active": 3}

@@ -8,7 +8,8 @@ import json
 import os
 from datetime import datetime
 
-DB_PATH = "data/fitness_wellness.db"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+DB_PATH = os.path.join(PROJECT_ROOT, "data", "fitness_wellness.db")
 
 def get_connection():
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
