@@ -53,6 +53,12 @@ function setupNavigation() {
   if (openAssessmentBtn) {
     openAssessmentBtn.addEventListener("click", () => switchTab("assessment-tab"));
   }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const tabParam = urlParams.get("tab") || window.location.hash.replace("#", "");
+  if (tabParam) {
+    switchTab(tabParam);
+  }
 }
 
 function switchTab(tabId) {
