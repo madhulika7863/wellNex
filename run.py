@@ -22,12 +22,13 @@ def main():
         print("\n[Step 1/2] Pre-trained ML models loaded successfully.")
 
     # 2. Boot Flask Web Server
+    port = int(os.environ.get("PORT", 5000))
     print("\n[Step 2/2] Starting WellNex Web Server...")
-    print(">>> Web Dashboard: http://localhost:5000")
+    print(f">>> Web Dashboard: http://localhost:{port}")
     print(">>> Press CTRL+C to stop the server\n")
 
     from backend.app import app
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    app.run(host="0.0.0.0", port=port, debug=False)
 
 if __name__ == "__main__":
     main()
